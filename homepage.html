@@ -4,13 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kost Analyse</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <input type="text" id="searchBar">
-    <input type="text" id="mængde">
-    <button id="submit">Tilføj madvare</button>
+    <form autocomplete="off">
+        <div class="autocomplete" style="width:300px">
+            <input id="myInput" type="text" name="fødevare" placeholder="Fødevare">
+        </div>
+        <button type="button" id="submit">Submit</button>
+    </form>
+    <div style="width:300px">
+        <input id="amount" type="text" name="amount" placeholder="Mængde (g)">
+    </div>
     
 </body>
 
 <script src="script.js"></script>
-</html>
+</html> 
