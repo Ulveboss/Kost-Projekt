@@ -1,12 +1,14 @@
-import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
-
-
 // icl ts pmo
 let lookUpData = []
 let database = []
 let userData = {
   food: []
 }
+
+
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+
+
 
 fetch('lookUp.json')
 
@@ -40,6 +42,11 @@ fetch('database.json')
       userData.food.push(fødevare)
 
       console.log(userData)
+      
+      document.getElementById('myInput').value = ""
+      document.getElementById('amount').value = ""
+
+      showData()
     })
 
 
@@ -140,4 +147,55 @@ document.addEventListener("click", function (e) {
 });
 }
 
+function convert(type) {
+  let sum = 0;
+  for(let i = 0; i < userData.food.length; i++){
+   let fødevare = database[userData.food[i].foodID][type]
+    sum +=  fødevare * userData.food[i].amount/100
+  }
+  console.log(sum)
+  return sum
+}
 
+function showData() {
+  let arcGenerator = d3.arc()
+    .innerRadius(30)
+    .outerRadius(100)
+    .padAngle(.02)
+    .padRadius(100)
+    .cornerRadius(4);
+
+  const pie = d3.pie();
+
+  let arcData = pie([convert("Protein"), convert("Fedt"), convert('Tilgængelig kulhydrat')]);
+  let names = ['Protein', 'Fedt', 'Kulhydrat'];
+  let colors = ['red', 'yellow', 'orange'];
+
+  console.log(arcData);
+
+  // Bind data to paths (pie slices)
+  let g = d3.select('g')
+    .selectAll('path')
+    .data(arcData)
+    .join('path')
+    .attr('d', arcGenerator)
+    .style('fill', (d, i) => colors[i]);
+
+  // Add text labels
+  d3.select('g')
+    .selectAll('text')
+    .data(arcData)
+    .join('text')
+    .attr('transform', d => `translate(${arcGenerator.centroid(d)})`) // Position in the center of the arc
+    .attr('text-anchor', 'middle') // Center the text horizontally
+    .attr('dy', '0.35em') // Adjust vertical alignment
+    .style('fill', 'black') // Text color
+    .style('font-size', '14px') // Adjust font size
+    .text((d, i) => names[i]); // Set the text
+}
+
+
+
+function displayFoodList() {
+  
+}
