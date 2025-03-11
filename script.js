@@ -39,6 +39,8 @@ fetch('database.json')
         amount: document.getElementById('amount').value
       }
   
+      displayFoodList(fødevare)
+
       userData.food.push(fødevare)
 
       console.log(userData)
@@ -196,6 +198,14 @@ function showData() {
 
 
 
-function displayFoodList() {
-  
+function displayFoodList(food) {
+  const foodList = document.getElementById('foodContainer')
+
+  let fødevare = document.createElement('paragraph')
+
+  fødevare.innerHTML = database[food.foodID].FødvareNavn + " " + food.amount + " g"
+
+  console.log(database[food.foodID].Fødvarenavn)
+
+  foodList.appendChild(fødevare)
 }

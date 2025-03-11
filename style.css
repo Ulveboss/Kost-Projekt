@@ -53,3 +53,10 @@ input[type=submit] {
 	fill: blueviolet;
 }*/
 
+.foodContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  gap: 10px;
+}
+
