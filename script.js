@@ -26,9 +26,16 @@ fetch('database.json')
     .then(data => {
 
       database = data
+      pageOpen()
     } )
 
+document.getElementById('clear').addEventListener('click', e => {
+  localStorage.clear();
+})
 
+document.getElementById('save').addEventListener('click', e => {
+  localStorage.setItem('foodItems', JSON.stringify(userData))
+})
 
     document.getElementById('submit').addEventListener('click', e => {
       let currentFødevare = document.getElementById('myInput').value
@@ -39,16 +46,19 @@ fetch('database.json')
         amount: document.getElementById('amount').value
       }
   
-      displayFoodList(fødevare)
+      
 
       userData.food.push(fødevare)
 
-      console.log(userData)
+      displayFoodList()
+
       
       document.getElementById('myInput').value = ""
       document.getElementById('amount').value = ""
 
       showData()
+      
+      showFoodStats("Protein", "Tilgængelig kulhydrat", 'Fedt')
     })
 
 
@@ -173,7 +183,7 @@ function showData() {
   let names = ['Protein', 'Fedt', 'Kulhydrat'];
   let colors = ['red', 'yellow', 'orange'];
 
-  console.log(arcData);
+
 
   // Bind data to paths (pie slices)
   let g = d3.select('g')
@@ -198,14 +208,54 @@ function showData() {
 
 
 
-function displayFoodList(food) {
+function displayFoodList() {
   const foodList = document.getElementById('foodContainer')
+  while (foodList.firstChild){
+    foodList.removeChild(foodList.firstChild)
+  }
+  
+  for(let i = 0; i < userData.food.length; i++){
+    let fødevare = document.createElement('p')
+    fødevare.innerHTML = database[userData.food[i].foodID].FødvareNavn + ": " + userData.food[i].amount + " g"
+    foodList.appendChild(fødevare)
+  }
+ 
 
-  let fødevare = document.createElement('paragraph')
-
-  fødevare.innerHTML = database[food.foodID].FødvareNavn + " " + food.amount + " g"
-
-  console.log(database[food.foodID].Fødvarenavn)
-
-  foodList.appendChild(fødevare)
+ 
 }
+
+function showFoodStats(...types) {
+  const div = document.getElementById("foodStats");
+  while (div.firstChild) {
+    div.removeChild(div.firstChild);
+  }
+
+  for(let i = 0; i < types.length; i++){
+    if(types[i]){
+      let paragraph = document.createElement('p')
+      let number = convert(types[i])
+      paragraph.innerHTML = `${types[i]}` + ": " + `${Math.round(number,2)}` + ` g `
+      div.appendChild(paragraph)
+    }
+   
+  }
+
+}
+function pageOpen() {
+  if(userData.food.length > 0){
+    displayFoodList()
+    showData()
+    showFoodStats("Protein", "Tilgængelig kulhydrat", 'Fedt')
+  }
+}
+
+/*window.addEventListener('beforeunload', function(e) {
+  localStorage.setItem('foodItems', JSON.stringify(userData))
+})*/
+
+window.addEventListener("load", (event) => {
+  if(JSON.parse(localStorage.getItem('foodItems'))){
+    userData = JSON.parse(localStorage.getItem('foodItems'))  
+  }
+
+});

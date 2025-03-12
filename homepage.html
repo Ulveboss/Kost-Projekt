@@ -12,18 +12,30 @@
             <input id="myInput" type="text" name="fødevare" placeholder="Fødevare">
         </div>
         <button type="button" id="submit">Submit</button>
+        <button type="button" id="clear">Clear Data</button>
+        <button type="button" id="save">Save Data</button>
     </form>
     <div style="width:300px">
         <input id="amount" type="text" name="amount" placeholder="Mængde (g)">
     </div>
     <!-- <button type="button" onclick="convert('Protein')">Convert</button> -->
-
-    <div id="foodContainer" class="foodContainer"></div>
+<div>
+    <h1>Hvad har du spist?</h1>
+</div>
+    <div id="foodContainer" class="foodContainer">
+      <p></p>
+    </div>
+    <div>
+        <h1>
+            Hvor meget har du fået?
+        </h1>
+    <div id="foodStats" class="foodStats"> </div>
+</div>
 
 
 
     <svg width="500" height="300">
-        <g transform="translate(300, 100)"> </g>
+        <g transform="translate(200, 100)"> </g>
     </svg>
 </body>
 
