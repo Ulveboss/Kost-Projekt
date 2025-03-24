@@ -248,9 +248,9 @@ function pageOpen() {
   if(userData.food.length > 0){
     displayFoodList()
     showData({name: "Protein", color: "red"},{name: "Fedt", color: 'yellow'}, {name: "Tilgængelig kulhydrat", color: 'orange'})
-    showFoodStats("Protein", "Tilgængelig kulhydrat", 'Fedt','Energi (kcal)')
+    showFoodStats("Protein", "Tilgængelig kulhydrat", 'Fedt')
   }
-  pageUpdate()
+  formUpdate()
 }
 
 /*window.addEventListener('beforeunload', function(e) {
@@ -264,10 +264,10 @@ window.addEventListener("load", (event) => {
 
 });
 document.getElementById('checkBoxes').addEventListener('click', (e) => {
-pageUpdate()
+  formUpdate()
 })
 
-function pageUpdate() {
+function formUpdate() {
   let checkboxeslength = document.getElementById('checkBoxes').length
   let form = document.getElementById('checkBoxes')
   let test = form.elements
@@ -280,7 +280,7 @@ function pageUpdate() {
       arr.push(obj)
     }
   }
-  console.log(arr)
   showData(...arr)
+  showFoodStats(...arr.map(arr => arr.name))
 
 }
