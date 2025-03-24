@@ -165,11 +165,10 @@ function convert(type) {
    let fødevare = database[userData.food[i].foodID][type]
     sum +=  fødevare * userData.food[i].amount/100
   }
-  console.log(sum)
   return sum
 }
 
-function showData() {
+function showData(...types) {
   let arcGenerator = d3.arc()
     .innerRadius(30)
     .outerRadius(100)
@@ -179,9 +178,13 @@ function showData() {
 
   const pie = d3.pie();
 
-  let arcData = pie([convert("Protein"), convert("Fedt"), convert('Tilgængelig kulhydrat')]);
-  let names = ['Protein', 'Fedt', 'Kulhydrat'];
-  let colors = ['red', 'yellow', 'orange'];
+  let data = []
+for(let i = 0; i < types.length; i++){
+  if(types[i]){
+    data.push(convert(types[i].name))
+  }
+}
+  let arcData = pie(data);
 
 
 
@@ -191,7 +194,7 @@ function showData() {
     .data(arcData)
     .join('path')
     .attr('d', arcGenerator)
-    .style('fill', (d, i) => colors[i]);
+    .style('fill', (d, i) => types[i].color);
 
   // Add text labels
   d3.select('g')
@@ -203,7 +206,7 @@ function showData() {
     .attr('dy', '0.35em') // Adjust vertical alignment
     .style('fill', 'black') // Text color
     .style('font-size', '14px') // Adjust font size
-    .text((d, i) => names[i]); // Set the text
+    .text((d, i) => types[i].name); // Set the text
 }
 
 
@@ -244,9 +247,10 @@ function showFoodStats(...types) {
 function pageOpen() {
   if(userData.food.length > 0){
     displayFoodList()
-    showData()
-    showFoodStats("Protein", "Tilgængelig kulhydrat", 'Fedt')
+    showData({name: "Protein", color: "red"},{name: "Fedt", color: 'yellow'}, {name: "Tilgængelig kulhydrat", color: 'orange'})
+    showFoodStats("Protein", "Tilgængelig kulhydrat", 'Fedt','Energi (kcal)')
   }
+  pageUpdate()
 }
 
 /*window.addEventListener('beforeunload', function(e) {
@@ -259,3 +263,24 @@ window.addEventListener("load", (event) => {
   }
 
 });
+document.getElementById('checkBoxes').addEventListener('click', (e) => {
+pageUpdate()
+})
+
+function pageUpdate() {
+  let checkboxeslength = document.getElementById('checkBoxes').length
+  let form = document.getElementById('checkBoxes')
+  let test = form.elements
+  let arr = []
+  for(let i = 0; i < checkboxeslength; i++){
+    if(document.getElementById(test[i].id).checked){
+      let checkbox = document.getElementById(test[i].id)
+      let colorvalue = checkbox.getAttribute('data-color')
+      let obj = {name: checkbox.id, color: colorvalue}
+      arr.push(obj)
+    }
+  }
+  console.log(arr)
+  showData(...arr)
+
+}
