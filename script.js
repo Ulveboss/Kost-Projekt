@@ -31,6 +31,7 @@ fetch('database.json')
 
 document.getElementById('clear').addEventListener('click', e => {
   localStorage.clear();
+  window.location.reload()  
 })
 
 document.getElementById('save').addEventListener('click', e => {
@@ -58,7 +59,8 @@ document.getElementById('save').addEventListener('click', e => {
 
       showData()
       
-      showFoodStats("Protein", "Tilgængelig kulhydrat", 'Fedt')
+      formUpdate()
+
     })
 
 
@@ -247,10 +249,9 @@ function showFoodStats(...types) {
 function pageOpen() {
   if(userData.food.length > 0){
     displayFoodList()
-    showData({name: "Protein", color: "red"},{name: "Fedt", color: 'yellow'}, {name: "Tilgængelig kulhydrat", color: 'orange'})
+    showData({name: "Protein", color: "yellow"},{name: "Fedt", color: 'red'}, {name: "Tilgængelig kulhydrat", color: 'green'})
     showFoodStats("Protein", "Tilgængelig kulhydrat", 'Fedt')
   }
-  formUpdate()
 }
 
 /*window.addEventListener('beforeunload', function(e) {
