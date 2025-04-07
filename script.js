@@ -147,8 +147,8 @@ function convert(type) {
 
 function showData(...types) {
   let arcGenerator = d3.arc()
-    .innerRadius(30)
-    .outerRadius(100)
+    .innerRadius(45)
+    .outerRadius(150)
     .padAngle(.02)
     .padRadius(100)
     .cornerRadius(4);
