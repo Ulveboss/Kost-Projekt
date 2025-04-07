@@ -4,6 +4,7 @@ let database = []
 let userData = {
   food: []
 }
+let saveState = true;
 
 
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
@@ -31,11 +32,8 @@ fetch('database.json')
 
 document.getElementById('clear').addEventListener('click', e => {
   localStorage.clear();
+  saveState = false;
   window.location.reload()  
-})
-
-document.getElementById('save').addEventListener('click', e => {
-  localStorage.setItem('foodItems', JSON.stringify(userData))
 })
 
     document.getElementById('submit').addEventListener('click', e => {
@@ -253,10 +251,9 @@ function pageOpen() {
     showFoodStats("Protein", "Tilgængelig kulhydrat", 'Fedt')
   }
 }
-
-/*window.addEventListener('beforeunload', function(e) {
-  localStorage.setItem('foodItems', JSON.stringify(userData))
-})*/
+window.addEventListener('beforeunload', (event) => {
+  if(saveState) localStorage.setItem('foodItems', JSON.stringify(userData))
+})
 
 window.addEventListener("load", (event) => {
   if(JSON.parse(localStorage.getItem('foodItems'))){

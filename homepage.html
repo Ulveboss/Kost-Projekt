@@ -1,55 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kost Analyse</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kost Analyse</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <form autocomplete="off">
-        <div class="autocomplete" style="width:300px">
-            <input id="myInput" type="text" name="fødevare" placeholder="Fødevare">
+  <div class="container">
+    <h1>Kost Analyse</h1>
+
+    <form autocomplete="off" class="input-form">
+      <div class="input-group">
+        <label for="myInput">Fødevare</label>
+        <div class="autocomplete">
+          <input id="myInput" type="text" name="fødevare" placeholder="Fødevare">
         </div>
-        <button type="button" id="submit">Submit</button>
-        <button type="button" id="clear">Clear Data</button>
-        <button type="button" id="save">Save Data</button>
-    </form>
-    <div style="width:300px">
+      </div>
+
+      <div class="input-group">
+        <label for="amount">Mængde (g)</label>
         <input id="amount" type="text" name="amount" placeholder="Mængde (g)">
-    </div>
-    <!-- <button type="button" onclick="convert('Protein')">Convert</button> -->
-<div>
-    <h1>Hvad har du spist?</h1>
-</div>
-    <div id="foodContainer" class="foodContainer">
-      <p></p>
-    </div>
-    <div>
-        <h1>
-            Hvor meget har du fået?
-        </h1>
-    <div id="foodStats" class="foodStats"> </div>
-</div>
+      </div>
 
+      <div class="button-group">
+        <button type="button" id="submit">Tilføj</button>
+        <button type="button" id="clear">Ryd Data</button>
 
+      </div>
+    </form>
+
+    <section>
+      <h2>Hvad har du spist?</h2>
+      <div id="foodContainer" class="foodContainer"></div>
+    </section>
+
+    <section>
+      <h2>Hvor meget har du fået?</h2>
+      <div id="foodStats" class="foodStats"></div>
+    </section>
+
+    <section>
+      <h2>Vælg næringsstoffer</h2>
+      <form id="checkBoxes" class="checkbox-group">
+        <label><input type="checkbox" id="Fedt" data-color="red" checked> Fedt</label>
+        <label><input type="checkbox" id="Protein" data-color="yellow" checked> Protein</label>
+        <label><input type="checkbox" id="Tilgængelig kulhydrat" data-color="green" checked> Tilgængelig kulhydrat</label>
+        <label><input type="checkbox" id="Kostfibre" data-color="purple"> Kostfibre</label>
+        <label><input type="checkbox" id="Energi (kcal)" data-color="blue"> Energi (kcal)</label>
+        <label><input type="checkbox" id="Sum sukkerarter" data-color="brown"> Sum sukkerarter</label>
+      </form>
+    </section>
 
     <svg width="500" height="300">
-        <g transform="translate(200, 100)"> </g>
+      <g transform="translate(200, 100)"> </g>
     </svg>
-    <form id="checkBoxes">
-        <input type="checkbox" id="Fedt" data-color="red" checked> Fedt
-        <input type="checkbox" id="Protein" data-color="yellow" checked> Protein
-        <input type="checkbox" id="Tilgængelig kulhydrat" data-color="green" checked> Tilgængelig kulhydrat
-        <input type="checkbox" id="Kostfibre" data-color="purple"> Kostfibre
-        <input type="checkbox" id="Energi (kcal)" data-color="blue"> Energi (kcal)
-        <input type="checkbox" id="Sum sukkerarter" data-color="brown"> Sum sukkerarter
-    </form>
+  </div>
+
+  <script type="module" src="script.js"></script>
 </body>
-
-
-
-
-
-<script type="module" src="script.js"></script>
-</html> 
+</html>

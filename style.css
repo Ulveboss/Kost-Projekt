@@ -1,4 +1,4 @@
-* {
+/** {
   box-sizing: border-box;
 }
 
@@ -79,4 +79,131 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}*/
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 16px;
+  background-color: #f9f9f9;
+  color: #333;
+  padding: 20px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 30px;
+}
+
+h1, h2 {
+  margin-bottom: 16px;
+  color: #222;
+}
+
+.input-form {
+  margin-bottom: 30px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f0f0f0;
+  font-size: 16px;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+button {
+  flex: 1;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.autocomplete {
+  position: relative;
+}
+
+.autocomplete-items {
+  position: absolute;
+  z-index: 99;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.autocomplete-items div:hover {
+  background-color: #e0e0e0;
+}
+
+.autocomplete-active {
+  background-color: #007BFF !important;
+  color: #fff;
+}
+
+.foodContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #f1f1f1;
+  padding: 8px 12px;
+  border-radius: 8px;
 }
