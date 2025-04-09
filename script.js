@@ -189,15 +189,11 @@ function displayFoodList() {
   while (foodList.firstChild) {
     foodList.removeChild(foodList.firstChild)
   }
-
   for (let i = 0; i < userData.food.length; i++) {
     let fødevare = document.createElement('p')
     fødevare.innerHTML = database[userData.food[i].foodID].FødvareNavn + ": " + userData.food[i].amount + " g"
     foodList.appendChild(fødevare)
   }
-
-
-
 }
 
 function showFoodStats(...types) {
@@ -205,7 +201,6 @@ function showFoodStats(...types) {
   while (div.firstChild) {
     div.removeChild(div.firstChild);
   }
-
   for (let i = 0; i < types.length; i++) {
     if (types[i]) {
       let paragraph = document.createElement('p')
@@ -251,5 +246,4 @@ function formUpdate() {
   }
   showData(...arr)
   showFoodStats(...arr.map(arr => arr.name))
-
 }
